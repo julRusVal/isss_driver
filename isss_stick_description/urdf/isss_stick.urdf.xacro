@@ -1,0 +1,34 @@
+<?xml version="2.0"?>
+<robot name="isss_stick" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="PI" value="3.141592" />
+  
+  <xacro:macro name="isss_stick" params="namespace debug">
+
+  <!-- Links. -->
+  <link name="$(arg namespace)/base_link"/>
+  <link name="$(arg namespace)/isss_link"/>
+  <link name="$(arg namespace)/sbg_link"/>
+  <link name="$(arg namespace)/gps_link"/>
+
+  <joint name="$(arg namespace)/sbg_joint" type="fixed">
+    <parent link="$(arg namespace)/base_link"/>
+    <child link="$(arg namespace)/sbg_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0. 0. 0.0"/>
+  </joint>
+
+  <joint name="$(arg namespace)/gps_joint" type="fixed">
+    <parent link="$(arg namespace)/base_link"/>
+    <child link="$(arg namespace)/gps_link"/>
+    <origin rpy="0.0 0.0 0.0" xyz="0. 0. 0."/>
+  </joint>
+
+  <joint name="$(arg namespace)/isss_joint" type="fixed">
+    <parent link="$(arg namespace)/base_link"/>
+    <child link="$(arg namespace)/isss_link"/>
+    <origin rpy="0. 0.0 0.0" xyz="0. 0. 0."/>
+  </joint>
+
+  </xacro:macro>
+
+</robot>

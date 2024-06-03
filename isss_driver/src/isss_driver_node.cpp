@@ -16,6 +16,9 @@
 
 #include <ros/ros.h>
 #include <std_msgs/String.h>
+// #include <date/tz.h>
+// #include <chrono>
+// #include <ctime>
 
 //#pragma comment(lib, "ws2_32.lib") // Link with Winsock librarytypedef unsigned int U32;
 
@@ -55,7 +58,7 @@ public:
     ISSSonar()
     {
         string_pub_ = nh.advertise<std_msgs::String>("/isss_stick/isss/raw", 100);
-        param<std::string>(("save_path"), save_path_, "/home/nacho/workspaces/DV/");
+        nh.param<std::string>(("save_path"), save_path_, "/home/nacho/workspaces/DV/");
     }
 
     void SetupSonar()
@@ -122,8 +125,9 @@ public:
         int bytesReceived = recv(sock, buffer, 2, 0); // Read 2 0xFF        cout << "bytesReceived " << bytesReceived << endl;        // Receive data
         int i = 0;
         // uint data;
-        uint8_t data;        
-        ofstream os(save_path_, ios::binary);
+        uint8_t data;   
+        std::cout << "Date " << ros::Time::now() << std::endl;     
+        ofstream os(save_path_ + std::to_string(ros::Time::now().toSec()) + ".bin", ios::binary);
         int dx = 0;
         // for(;;) {
         while(ros::ok())
