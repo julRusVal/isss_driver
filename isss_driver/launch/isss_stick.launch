@@ -1,0 +1,8 @@
+<launch>
+
+  <arg name="namespace" default="isss_stick"/>
+
+    <group ns="$(arg namespace)">
+    </group>
+
+</launch>
